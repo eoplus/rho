@@ -76,6 +76,13 @@ average fit to three Sun zenith angles (0, 30 and 60 degrees, in air).
 If the arguments passed to the function are outside the range used for 
 parametrization of the specific model, values will be return with a warning 
 of extrapolation beyond model domain.
+
+Note that although the base data for the parametrization of both models 
+includes the inelastic scattering (vibrational Raman from water and 
+fluorescence from pigments and dissolved organic carbon), the semi-analytical
+approximations do not model those processes. Simulations therefore should 
+present higher errors when those processes are important contributors, 
+particularly pigment fluorescence will produce a spectrally localized error.
 }
 \examples{
 theta_s  <- rad(seq(0, 90, 0.5))
