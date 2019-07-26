@@ -2,6 +2,13 @@
 
 export(deg)
 export(fresnel)
+export(liquid_DFRI)
+export(n_air)
+export(n_calcite)
+export(n_cellulose)
+export(n_quartz)
+export(n_water)
+export(propagate_r)
 export(rad)
 export(snell)
 export(snell_decomp)

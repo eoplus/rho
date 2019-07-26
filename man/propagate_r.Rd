@@ -2,12 +2,39 @@
 % Please edit documentation in R/rtm_semi_analytical.R
 \name{propagate_r}
 \alias{propagate_r}
-\title{Propagates reflectance across a boundary:
-HOW TO GENERALIZE THIS FUNCTION??? MAKE BOTH WAYS, for Rrs and R}
+\title{Propagates reflectance across a boundary}
 \usage{
-propagate_r(rrs)
+propagate_r(r, to = c("air", "water"))
+}
+\arguments{
+\item{r}{Reflectance (unitless or 1/sr).}
+
+\item{to}{One of: "air" or "water".}
 }
 \description{
-Propagates reflectance across a boundary:
-HOW TO GENERALIZE THIS FUNCTION??? MAKE BOTH WAYS, for Rrs and R
+This function propagates the reflectance across the air-water interface.
+}
+\details{
+This function applies the average coefficients for water 
+transmittance and refractive index of water relative to air to calculate the
+scaling of the reflectance signal just above or just below the water surface.
+The base equation and data is described in Gordon et al. (1988).
+}
+\references{
+Gordon, H. R.; Brown, O. B.; Evans, R. H.; Brown, J. W.; Smith, R. C.; Baker, 
+K. S.; Clark, D. K. 1988. A semianalytic radiance model ofocean color. 
+Journal of Geophysical Research 93, 10, 909-10.924. DOI: 
+10.1029/JD093iD09p10909
+
+Lee, Z.-P.; Carder, K. L.; Mobley, C. D.; Steward, R. G.; Patch, J. S. 1998. 
+Hyperspectral remote sensing for shallow waters. I. A semianalytical model. 
+Applied Optics 37, 27, 6329-6338. DOI: 10.1364/AO.37.006329
+
+Lee, Z.-P.; Carder, K. L.; Arnone, R. A. 2002. Deriving inherent optical 
+properties from water color: a multiband quasi-analytical algorithm for 
+optically deep waters. Applied Optics 41, 27, 5755-5772. DOI: 
+10.1364/AO.41.005755
+}
+\seealso{
+\code{\link{rta_sa}}
 }
