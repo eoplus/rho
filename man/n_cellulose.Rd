@@ -14,7 +14,8 @@ A numeric vector with the refractive index (unitless) of cellulose
 relative to vaccum.
 }
 \description{
-This function calculates the real part of the refractive index of cellulose.
+This function calculates the real part of the refractive index of cellulose 
+relative to vaccum.
 }
 \examples{
 # Retrieve the real part of the refractive index of cellulose in the visible
@@ -23,10 +24,6 @@ n_cellulose(lambda = 400:700)
 
 }
 \references{
-Ballard, S. S.; Browder, J. S.; Ebersole, J. F. 1982. Index of Refraction. 
-In: Gray D. E. Ed., American Institute of Physics Handbook, McGraw-Hill, New 
-York.
-
 Fournier, G. R.; Ardouin, J.-P.; Levesque, M. 2018. Modeling Sea Bottom 
 Hyperspectral Reflectance. Applied Sciences 8, 12, 23 p. DOI: 
 10.3390/app8122680

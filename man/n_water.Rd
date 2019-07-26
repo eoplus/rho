@@ -39,12 +39,9 @@ of the refractive index of liquids parametrized by Proutiere et al. (1992).
 That pressure, in bar, should be in excess of surface pressure, i.e., to 
 retrieve surface values, P = 0.
 
-The imaginary part of the refractive index of pure water is provided here as 
-independent of temperature, salinity and pressure, taken from the tabulated 
-values provided by Segeistein (1975). Note that in the UV range it is 
-expected that the absorption and therefore the imaginary part of the 
-refractive index be dependent of dissolved salts and dissolved oxygen (Jonaz 
-& Fournier, 2007).
+The imaginary part of the refractive index of pure water is calculated from
+the temperature and salinity dependent absorption of pure (saline) water (
+function \code{a_water}).
 
 The original parametrization of Quan & Fry (1995) is based on refractive 
 index relative to air measured by Austin & Halikas (1976), and the function 
@@ -84,9 +81,6 @@ Schiebener, P.; Straub, J.; Levelt Sengers, J. M. H.; Gallagher, J. S. 1990.
 Refractive index of water and steam as a function of wavelength, temperature 
 and density. Journal of Physical and Chemical Reference Data 19, 677–717. 
 DOI: 10.1063/1.555859
-
-Segeistein, D. J. 1975. The complex refractive index of water. Master Thesis,
-University of Missouri-Kansas City, 175 pp.
 
 Zhang, X. Hu, L. 2009. Estimating scattering of pure water from density 
 fluctuation of the refractive index. Optics Express 17, 3, 1671-1678. DOI: 

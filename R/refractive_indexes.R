@@ -40,7 +40,7 @@
 
 n_air <- function(lambda) {
 
-  if(any(lambda < 200) || any(lambda < 1100))
+  if(any(lambda < 200) || any(lambda > 1100))
     warning("Requested wavelength outside model domain: [200,1100]")
 
   l2  <- (lambda * 1E-3)^-2  # Convert to wavlength in microns and square
@@ -50,7 +50,7 @@ n_air <- function(lambda) {
   k2  <- 167917
   k3  <- 57.362
 
-  n <- 1 + ((k0 / (k1 - L2) + k2 / (k3 - L2)) * 1E-8)
+  n <- 1 + ((k0 / (k1 - l2) + k2 / (k3 - l2)) * 1E-8)
 
   return(n)
 
@@ -80,12 +80,9 @@ n_air <- function(lambda) {
 #' That pressure, in bar, should be in excess of surface pressure, i.e., to 
 #' retrieve surface values, P = 0.
 #'
-#' The imaginary part of the refractive index of pure water is provided here as 
-#' independent of temperature, salinity and pressure, taken from the tabulated 
-#' values provided by Segeistein (1975). Note that in the UV range it is 
-#' expected that the absorption and therefore the imaginary part of the 
-#' refractive index be dependent of dissolved salts and dissolved oxygen (Jonaz 
-#' & Fournier, 2007).
+#' The imaginary part of the refractive index of pure water is calculated from
+#' the temperature and salinity dependent absorption of pure (saline) water (
+#' function \code{a_water}).
 #'
 #' The original parametrization of Quan & Fry (1995) is based on refractive 
 #' index relative to air measured by Austin & Halikas (1976), and the function 
@@ -122,9 +119,6 @@ n_air <- function(lambda) {
 #' Refractive index of water and steam as a function of wavelength, temperature 
 #' and density. Journal of Physical and Chemical Reference Data 19, 677–717. 
 #' DOI: 10.1063/1.555859
-#'
-#' Segeistein, D. J. 1975. The complex refractive index of water. Master Thesis,
-#' University of Missouri-Kansas City, 175 pp.
 #'
 #' Zhang, X. Hu, L. 2009. Estimating scattering of pure water from density 
 #' fluctuation of the refractive index. Optics Express 17, 3, 1671-1678. DOI: 
@@ -184,8 +178,8 @@ n_water <- function(lambda, Tc, S, P, type = c('real', 'complex')) {
   }
 
   if(type == "complex") {
-    ni <- approx(x = ni_water_segeistein[, 1], y = ni_water_segeistein[, 2], 
-                 xout = lambda, rule = 1)$y
+    a  <- a_water(lambda = lambda, Tc = Tc, S = S)
+    ni <- lambda * 1E-9 * a / 4 / pi
     n  <- complex(real = n, imaginary = ni)
   }
 
