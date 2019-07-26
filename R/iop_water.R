@@ -4,6 +4,10 @@
 #' This function calculates the temperature and salinity dependent absorption of
 #' pure (saline) water.
 #'
+#' @param lambda Wavelength in vacuum (nm).
+#' @param Tc     Temperature [0,30] (ºC).
+#' @param S      Salinity [0,40] (parts per thousand).
+#'
 #' @details The harmonized pure water absorption data between 300 and 4000 nm 
 #' from Röttgers et al. (2011) and the absorption derivatives with respect to 
 #' temperature and salinity (Sullivan et al., 2006) are used to calculate the 

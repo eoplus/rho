@@ -21,8 +21,8 @@ WOPP - Water Optical Properties Processor, Version 1.7, 2016.
 a_water_wopp
 }
 \description{
-A harmonized dataset containing multisource data of absorption coefficient
-of liquid water at 0 salilnity and 20 degrees C, from 300 nm to 4000 nm in 
+A harmonized dataset containing multi-source data of absorption coefficient
+of liquid water at 0 salinity and 20 degrees C, from 300 nm to 4000 nm in 
 steps of two nm. This dataset combines the measurements of several sources 
 listed below, harmonized to a standard temperature by using the absorption 
 derivative with respect to temperature (Sullivan et al., 2006). The 

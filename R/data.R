@@ -1,8 +1,8 @@
 #' Absorption coefficient of liquid water 
 #'
-#' A harmonized dataset containing multisource data of absorption coefficient
-#' of liquid water at 0 salilnity and 20 degrees C, from 300 nm to 4000 nm in 
-#' steps of two nm. This dataset combines the measurements of several sources 
+#' A harmonized dataset containing multi-source data of absorption coefficient
+#' of liquid water at 0 salinity and 20 degreesC, from 300 nm to 4000 nm in 
+#' steps of 2 nm. This dataset combines the measurements of several sources 
 #' listed below, harmonized to a standard temperature by using the absorption 
 #' derivative with respect to temperature (Sullivan et al., 2006). The 
 #' derivative with respect to temperature and salinity (Sullivan et al., 2006) 
