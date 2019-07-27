@@ -62,10 +62,10 @@ n_air <- function(lambda) {
 #' relative to vaccum. The complex refractive index can also be returned. See 
 #' details.
 #'
-#' @param lambda Wavelength in vacuum [200,1100] (nm).
-#' @param Tc     Temperature [0,30] (ºC).
-#' @param S      Salinity [0,40] (parts per thousand).
-#' @param P      Pressure [0,1028] (bar in excess of 1 ATM).
+#' @param lambda Wavelength in vacuum (nm).
+#' @param Tc     Temperature (ºC).
+#' @param S      Salinity (parts per thousand).
+#' @param P      Pressure (bar in excess of 1 ATM).
 #' @param type   One of: "real" or "complex". See details.
 #'
 #' @details The temperature and salinity dependent spectral refractive index of 
@@ -135,7 +135,7 @@ n_air <- function(lambda) {
 #'
 #' @export
 
-n_water <- function(lambda, Tc, S, P, type = c('real', 'complex')) {
+n_water <- function(lambda, Tc = 20, S = 0, P = 0, type = c('real', 'complex')) {
 
   if(any(lambda < 200) || any(lambda > 1000))
     warning("Requested wavelength outside model domain: [200,1100] (nm)")
@@ -171,10 +171,10 @@ n_water <- function(lambda, Tc, S, P, type = c('real', 'complex')) {
   n <- n_air(lambda = lambda) * n
 
   if(any(P > 0)) {
-    d0   <- density_w(Tc = Tc, S = S, P = 0) * 1E-3 # kg m^-3 to kg dm^-3
-    d    <- density_w(Tc = Tc, S = S, P = P) * 1E-3 # kg m^-3 to kg dm^-3
-    dfri <- sqrt(liquid_DFRI(n, d0))                # dn^2 dd^-1 to dn dd^-1
-    n  <- n + dfri * (d - d0)
+    d0   <- d_water(Tc = Tc, S = S, P = 0) * 1E-3 # kg m^-3 to kg dm^-3
+    d    <- d_water(Tc = Tc, S = S, P = P) * 1E-3 # kg m^-3 to kg dm^-3
+    dfri <- liquid_DFRI(n, d0)
+    n  <- sqrt(n^2 + dfri * (d - d0))
   }
 
   if(type == "complex") {
@@ -286,7 +286,8 @@ n_cellulose <- function(lambda) {
 #' calcite relative to vaccum. See details.
 #'
 #' @param lambda Wavelength in vacuum (nm).
-#' @param comp   Logical. Should the ordinary and extraordinary indexes be returned?
+#' @param comp   Logical. Should the ordinary and extraordinary indexes be 
+#'               returned?
 #'
 #' @details Calcite is birefringent with two orientation dependent indexes of 
 #' refraction, the extraordinary index of refraction (propagation along the 
@@ -354,7 +355,8 @@ n_calcite <- function(lambda, comp = F) {
 #' quartz relative to vaccum. See details.
 #'
 #' @param lambda Wavelength in vacuum (nm).
-#' @param comp   Logical. Should the ordinary and extraordinary indexes be returned?
+#' @param comp   Logical. Should the ordinary and extraordinary indexes be 
+#'               returned?
 #'
 #' @details Quatrz is birefringent with two orientation dependent indexes of 
 #' refraction, the extraordinary index of refraction (propagation along the 

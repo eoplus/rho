@@ -4,16 +4,16 @@
 \alias{n_water}
 \title{Dispersion formula for the refractive index of liquid water}
 \usage{
-n_water(lambda, Tc, S, P, type = c("real", "complex"))
+n_water(lambda, Tc = 20, S = 0, P = 0, type = c("real", "complex"))
 }
 \arguments{
-\item{lambda}{Wavelength in vacuum [200,1100] (nm).}
+\item{lambda}{Wavelength in vacuum (nm).}
 
-\item{Tc}{Temperature [0,30] (ºC).}
+\item{Tc}{Temperature (ºC).}
 
-\item{S}{Salinity [0,40] (parts per thousand).}
+\item{S}{Salinity (parts per thousand).}
 
-\item{P}{Pressure [0,1028] (bar in excess of 1 ATM).}
+\item{P}{Pressure (bar in excess of 1 ATM).}
 
 \item{type}{One of: "real" or "complex". See details.}
 }

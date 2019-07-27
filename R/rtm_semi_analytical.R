@@ -81,12 +81,20 @@
 #' @seealso \code{\link{propagate_r}}
 #'
 #' @examples
-#' theta_s  <- rad(seq(0, 90, 0.5))
-#' tehta_sw <- snell(theta_s, 1, 1.33)
-#' r_am     <- rta_sa(a = 1, bb = 0.5, theta_s = theta_sw, model = "Albert-Mobley03")
-#' r_lee    <- rta_sa(a = 1, bb = 0.5, theta_s = theta_sw, model = "Lee98")
-#' plot(deg(theta_s), r_am)
-#' lines(deg(theta_s), r_lee)
+#' # Calculate the subsurface hemispherical-directional water-leaving 
+#' # reflectance of average pure seawater in the visible range for optically 
+#' # deep condition:
+#' a  <- a_water(lambda = 400:700, S = 34.72, Tc = 3.5)
+#' b  <- b_water(lambda = 400:700, S = 34.72, Tc = 3.5)
+#' na <- n_air(lambda = 400:700)
+#' nw <- n_water(lambda = 400:700, S = 34.72, Tc = 3.5, type = "complex")
+#' theta_sw <- snell_decomp(snell(rad(30), ni = na, nr = nw), nr = nw)[, 1]
+#' r_am     <- rta_sa(a = a, bb = b / 2, theta_s = theta_sw, 
+#'                    model = "Albert-Mobley03", aop = "rrs")
+#' r_lee    <- rta_sa(a = a, bb = b / 2, theta_s = theta_sw, model = "Lee98", 
+#'                    aop = "rrs")
+#' plot(400:700, r_am, type = 'l')
+#' lines(400:700, r_lee, lty = 2)
 
 
 rta_sa <- function(a, bb, theta_s = 0, depth = Inf, rho_b, theta_v = 0, wsp = 0, 
@@ -179,14 +187,14 @@ rta_sa <- function(a, bb, theta_s = 0, depth = Inf, rho_b, theta_v = 0, wsp = 0,
     if(!missing(rho_b)) .rho_b <- rho_b / pi
   } else if(aop == 'rho'){
     q1   <- pi
-    if(!missing(rho_b)) .rho_b <- rho_b / pi
+    if(!missing(rho_b)) .rho_b <- rho_b
   }
 
   k <- a + bb
   u <- bb / k
 
   R <- q1 * (p1 + p2 * u) * u
-  R <- rep(R, length(theta_s))
+  R <- R * rep(1, length(theta_s)) * rep(1, length(theta_v))
 
   if(!is.infinite(depth)) {
     mu_s <- cos(theta_s)

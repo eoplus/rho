@@ -4,11 +4,11 @@
 #' of liquid water at 0 salinity and 20 degreesC, from 300 nm to 4000 nm in 
 #' steps of 2 nm. This dataset combines the measurements of several sources 
 #' listed below, harmonized to a standard temperature by using the absorption 
-#' derivative with respect to temperature (Sullivan et al., 2006). The 
-#' derivative with respect to temperature and salinity (Sullivan et al., 2006) 
-#' are also provided. The dataset is taken from the absorption coefficient 
-#' Version 3 of the Water Optical Properties Processor (WOPP) and fully 
-#' documented in Röttgers et al. (2011).
+#' derivative with respect to temperature (Röttgers, 2010). The derivative with 
+#' respect to temperature and salinity (Röttgers, 2010) are also provided. The 
+#' dataset is taken from the absorption coefficient Version 3 of the Water 
+#' Optical Properties Processor (WOPP) and fully documented in Röttgers et al. 
+#' (2011).
 #'
 #' This is the base data used by functions \code{n_water} to retrieve the 
 #' imaginary part of the refractive index of water and by function 
@@ -55,18 +55,15 @@
 #' II. Integrating cavity measurements. Applied Optics 36, 33, 8710-8723. DOI:
 #' 10.1364/AO.36.008710
 #'
+#' Röttgers, R. 2010. Measurements of inherent optical properties of pure water. 
+#' Technical note, STSE-WaterRadiance D5, ESA.
+#'
 #' Röttgers, R.; Doerffer, R.; McKee, D.; Schönfeld, W. 2011. The Water Optical 
 #' Properties Processor (WOPP). Pure water spectral absorption, scattering, and 
 #' real part of refractive index model. Algorithm Theoretical Basis Document.
 #' 
 #' Segelstein, D. J. 1975. The complex refractive index of water. Master Thesis,
 #' University of Missouri-Kansas City, 175 pp.
-#'
-#' Sullivan, J. M.; Twardowski, M. S.; Zaneveld, J. R. V.; Moore, C. M.; 
-#' Barnard, A. H.; Donaghay, P. L.; Rhoades. B. 2006. The hyperspectral 
-#' temperature and salt dependencies of absorption by water and heavy water in 
-#' the 400–750 nm spectral range. Applied Optics 45, 21, 5294-5309. DOI:
-#' 10.1364/AO.45.005294
 #'
 #' Wang, L. 2008. Measuring optical absorption coefficient of pure water in UV 
 #' using the integrating cavity absorption meter. Ph. D. thesis. Texas A&M 

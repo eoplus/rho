@@ -6,6 +6,13 @@
 \usage{
 a_water(lambda, S = 0, Tc = 20)
 }
+\arguments{
+\item{lambda}{Wavelength in vacuum (nm).}
+
+\item{S}{Salinity [0,40] (parts per thousand).}
+
+\item{Tc}{Temperature [0,30] (ºC).}
+}
 \value{
 A numeric vector with the absorption coefficient (1/m) of pure 
 (saline) water.
@@ -17,8 +24,9 @@ pure (saline) water.
 \details{
 The harmonized pure water absorption data between 300 and 4000 nm 
 from Röttgers et al. (2011) and the absorption derivatives with respect to 
-temperature and salinity (Sullivan et al., 2006) are used to calculate the 
-absorption at the desired conditions. For more information see ?a_water_wopp.
+temperature and salinity (Röttgers, 2010) are used to calculate the 
+absorption at the desired conditions, following Röttgers et al. (2011). For 
+more information see ?a_water_wopp.
 
 Coefficients are linear interpolated from tabulated values (2 nm steps) to 
 the requested wavelength.
@@ -29,16 +37,13 @@ a_water(lambda = 400:700, S = 34.72, Tc = 3.5)
 
 }
 \references{
+Röttgers, R. 2010. Measurements of inherent optical properties of pure water. 
+Technical note, STSE-WaterRadiance D5, ESA.
+
 Röttgers, R.; Doerffer, R.; McKee, D.; Schönfeld, W. 2011. The Water Optical 
 Properties Processor (WOPP). Pure water spectral absorption, scattering, and 
 real part of refractive index model. Algorithm Theoretical Basis Document.
-
-Sullivan, J. M.; Twardowski, M. S.; Zaneveld, J. R. V.; Moore, C. M.; 
-Barnard, A. H.; Donaghay, P. L.; Rhoades. B. 2006. The hyperspectral 
-temperature and salt dependencies of absorption by water and heavy water in 
-the 400–750 nm spectral range. Applied Optics 45, 21, 5294-5309. DOI:
-10.1364/AO.45.005294
 }
 \seealso{
-\code{\link{n_water}}, \code{\link{b_water}}, \code{\link{pf_water}}
+\code{\link{n_water}}, \code{\link{vsf_water}}, \code{\link{b_water}}
 }

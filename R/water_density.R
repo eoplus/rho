@@ -4,9 +4,9 @@
 #' This function calculates the water density as a function of pressure, 
 #' temprature and salinity.
 #'
-#' @param Tc     Temperature [0,30] (ºC).
-#' @param S      Salinity [0,40] (parts per thousand).
-#' @param P      Pressure [0,1028] (bar in excess of 1 ATM).
+#' @param Tc     Temperature (ºC).
+#' @param S      Salinity (parts per thousand).
+#' @param P      Pressure (bar in excess of 1 ATM).
 #'
 #' @details The density of pure (saline) water at diferent pressures is based on 
 #' the UNESCO (1981) report, as recomended by Zhang et al. (2009) and Libes 
@@ -28,11 +28,11 @@
 #'
 #' @examples
 #' # Average seawater density at surface under 1 ATM:
-#' density_w(Tc = 3.5, S = 34.72, P = 0)
+#' d_water(Tc = 3.5, S = 34.72, P = 0)
 #' 
 #' @export
 
-density_w <- function(Tc, S, P) {
+d_water <- function(Tc = 20, S = 0, P = 0) {
 
   if(.check_vect_args(arg_ls = list(Tc, S, P)))
     stop("For vector applications, the length of all vectors must be integer ", 

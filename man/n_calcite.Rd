@@ -9,7 +9,8 @@ n_calcite(lambda, comp = F)
 \arguments{
 \item{lambda}{Wavelength in vacuum (nm).}
 
-\item{comp}{Logical. Should the ordinary and extraordinary indexes be returned?}
+\item{comp}{Logical. Should the ordinary and extraordinary indexes be 
+returned?}
 }
 \value{
 A numeric vector with the refractive index (unitless) of calcite 
