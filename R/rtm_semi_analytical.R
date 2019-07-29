@@ -95,6 +95,8 @@
 #'                    aop = "rrs")
 #' plot(400:700, r_am, type = 'l')
 #' lines(400:700, r_lee, lty = 2)
+#'
+#' @export
 
 
 rta_sa <- function(a, bb, theta_s = 0, depth = Inf, rho_b, theta_v = 0, wsp = 0, 

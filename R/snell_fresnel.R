@@ -69,10 +69,12 @@ snell <- function(thetai, ni, nr) {
   if(any(Re(ni) < 0) || any(Re(nr) < 0))
     stop("Handling of negative refractive indexes is not implemented")
 
-  if(!is.complex(ni) && !is.complex(nr)) {
-    ca <- suppressWarnings(asin(nr / ni))
-    thetai[thetai > ca] <- NaN
-  }
+#  When with just one angle and several refractive indexes, it can break because
+#  the initial angle will not be replicated and a vectors of NA will result...
+#  if(!is.complex(ni) && !is.complex(nr)) {
+#    ca <- suppressWarnings(asin(nr / ni))
+#    thetai[thetai > ca] <- NaN
+#  }
 
   thetar <- suppressWarnings(asin(sin(thetai) * ni / nr))
   thetar[is.nan(thetar)] <- pi / 2

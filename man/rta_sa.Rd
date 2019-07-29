@@ -99,6 +99,7 @@ r_lee    <- rta_sa(a = a, bb = b / 2, theta_s = theta_sw, model = "Lee98",
                    aop = "rrs")
 plot(400:700, r_am, type = 'l')
 lines(400:700, r_lee, lty = 2)
+
 }
 \references{
 Albert, A.; Mobley, C. D. 2003. An analytical model for subsurface irradiance 
