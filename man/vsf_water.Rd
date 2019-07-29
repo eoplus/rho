@@ -54,9 +54,9 @@ given polar scattering angle (Jonaz & Fournier, 2007).
 
 Finally, this function will provide values slightly higher than the ones 
 provided by the Water Optical Properties Processor (WOPP; Röttgers et al., 
-2011) due to small differences in the physical constants, in particular the 
-molecular weight of pure water. The required physical constants are taken 
-from: \url{http://physics.nist.gov/cuu/Constants/}
+2011) due to different equations for water density. See \code{d_water} for 
+details. The required physical constants are taken from the 2018 edition of
+CODATA, available from: \url{http://physics.nist.gov/cuu/Constants/}
 }
 \examples{
 # Retrieve the volume scattering function of average seawater at 550 nm:

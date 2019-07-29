@@ -75,3 +75,35 @@
 #'
 "a_water_wopp"
 
+#' Specific absorption coefficient of cellulose
+#'
+#' The absorptivity of cellulose was inverted by Jacquemoud et al. (1996) from
+#' a large database of leaf reflectance and transmittance using a two stream 
+#' model. The retrieved absorptivity was then normalized by the cellulose + 
+#' lignin dry mass per leaf area (g / m^2), resulting in the mass specific 
+#' absorption coefficient (m^2 / g). Since the results of Jacquemound et al. 
+#' (1996) were retrieved with a model based on the Kubelka-Munk theory, the 
+#' values are scaled by 2 to be used with radiative transfer theory (Ganapol et 
+#' al. 1999).
+#'
+#' A similar spectral shape was determined by Dawson et al. (1998), but requires 
+#' scaling and offset to match the values of Jacquemoud et al. (1996) as used by
+#' Fournier et al. (2018) to invert macrophyte properties.
+#'
+#' @source PROSPEC source code, Version 2.01, 1995.
+#'
+#' @references
+#' Fournier, G. R.; Ardouin, J.-P.; Levesque, M. Modeling Sea Bottom 
+#' Hyperspectral Reflectance. Applied Sciences 8,12, 2680. DOI: 
+#' 10.3390/app8122680
+#'
+#' Ganapol, B. D.; Johnson, L. F.; Hlavka, C. A.; Peterson, D. L.; Bond, B. 
+#' 1999. LCM2: A coupled leaf/canopy radiative transfer model. Remote Sensing of 
+#' Environment 70, 2, 153-166. DOI: 10.1016/S0034-4257(99)00030-9
+#'
+#' Jacquemoud, S.; Ustin, S. L.; Verdebout, J.; Schmuck, G.; Andreoli, G.; 
+#' Hosgood, B.. 1996. Estimating leaf biochemistry using the PROSPECT leaf 
+#' optical properties model. Remote Sensing of Environment 56, 3, 194-202. DOI: 
+#' 10.1016/0034-4257(95)00238-3 
+#'
+"a_cellulose"

@@ -137,7 +137,7 @@ n_air <- function(lambda) {
 
 n_water <- function(lambda, Tc = 20, S = 0, P = 0, type = c('real', 'complex')) {
 
-  if(any(lambda < 200) || any(lambda > 1000))
+  if(any(lambda < 200) || any(lambda > 1100))
     warning("Requested wavelength outside model domain: [200,1100] (nm)")
 
   if(any(Tc < 0) || any(Tc > 30))
@@ -274,7 +274,7 @@ n_cellulose <- function(lambda) {
 
   lambda <- lambda * 1E-3  # Conversion from nm to microns
 
-  n <- sqrt(1.124 * lambda^2 / (lambda^2 - 0.011087)) + 1
+  n <- sqrt(1 + 1.124 * lambda^2 / (lambda^2 - 0.011087))
 
   return(n)
 

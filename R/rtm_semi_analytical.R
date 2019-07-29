@@ -126,7 +126,7 @@ rta_sa <- function(a, bb, theta_s = 0, depth = Inf, rho_b, theta_v = 0, wsp = 0,
   .args$depth <- abs(depth)
 
   if(model == 'Albert-Mobley03') {
-    if(any((bb / (a + bb)) > 0.8))
+    if(any((bb / (a + bb)) > 0.8, na.rm = T))
       warning("Back-scattering albedo is beyond model domain (max = 0.8)")
 
     if(any(theta_s > 0.8028515))
