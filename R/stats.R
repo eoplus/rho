@@ -37,7 +37,7 @@ rstat <- function(x, y, units = '') {
   mape <- mean(abs(ymx) / x, na.rm = TRUE) * 100
   bias <- mean((ymx) / x, na.rm = TRUE) * 100
   rmse <- sqrt(mean((ymx)^2, na.rm = TRUE))
-  r2   <- cor(x, y)^2 # since is a simple linear model (1:1)
+  r2   <- cor(x, y, use = "complete.obs")^2 # since is a simple linear model (1:1)
   n    <- nrow(na.omit(cbind(x, y)))
   rang <- range(x, na.rm = T) 
   res  <- list(mape = mape, bias = bias, rmse = rmse, r2 = r2, n = n, 
