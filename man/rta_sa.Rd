@@ -4,31 +4,29 @@
 \alias{rta_sa}
 \title{Radiative transfer semi-analytical approximations}
 \usage{
-rta_sa(a, bb, theta_s = 0, depth = Inf, rho_b, theta_v = 0,
-  wsp = 0, aop = c("rrs", "rho"), model = c("Albert-Mobley03",
-  "Lee98"), bbp)
+rta_sa(a, bb, ...)
 }
 \arguments{
 \item{a}{Total absorption coefficient (1/m).}
 
 \item{bb}{Total back-scattering coefficient (1/m).}
 
-\item{theta_s}{Sun zenith angle refracted underwater (radians).}
+\item{rho_b}{Bottom bi-hemispherical reflectance (unitless).}
 
 \item{depth}{Bottom depth, positive downwards (m).}
 
-\item{rho_b}{Bottom bi-hemispherical reflectance (unitless).}
+\item{theta_s}{Sun zenith angle refracted underwater (radians).}
 
 \item{theta_v}{Observation nadir angle refracted underwater (radians).}
 
 \item{wsp}{Wind speed (m/s). Only for model "Albert-Mobley03".}
 
+\item{bbp}{Particle back-scattering (1/m). See details.}
+
 \item{aop}{Desired reflectance. One of: 'rho' or 'rrs'. See details.}
 
 \item{model}{Semi-analytical parametrization to use. Possible values are:
 "Albert-Mobley03" and "Lee98". See details.}
-
-\item{bbp}{Particle back-scattering (1/m). See details.}
 }
 \value{
 A numeric vector with the subsurface bi-hemispherical ('r', 

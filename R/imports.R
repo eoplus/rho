@@ -1,0 +1,2 @@
+#' @import magrittr
+NULL

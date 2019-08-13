@@ -99,9 +99,9 @@
 #' @export
 
 
-rta_sa <- function(a, bb, theta_s = 0, depth = Inf, rho_b, theta_v = 0, wsp = 0, 
-                   aop = c('rrs', 'rho'), model = c("Albert-Mobley03", "Lee98"), 
-                   bbp) {
+rta_sa <- function(a, bb, ... ){#theta_s = 0, depth = Inf, rho_b, theta_v = 0, wsp = 0, 
+                   #aop = c('rrs', 'rho'), model = c("Albert-Mobley03", "Lee98"), 
+                   #bbp) {
 
   if(missing(a) || missing(bb))
     stop("At least a and bb must be specified", call. = FALSE)
@@ -204,7 +204,7 @@ rta_sa <- function(a, bb, theta_s = 0, depth = Inf, rho_b, theta_v = 0, wsp = 0,
     du_w <- k1w * sqrt(1 + k2w * u)
     du_b <- k1b * sqrt(1 + k2b * u)
     R    <- R * (1 - exp(-(1 / mu_s + du_w / mu_v) * k * depth)) + 
-            .rho_b * exp(-(1 / mu_w + du_b / mu_v) * k * depth)
+            .rho_b * exp(-(1 / mu_s + du_b / mu_v) * k * depth)
   }
 
   return(R)
@@ -259,7 +259,8 @@ rta_sa <- function(a, bb, theta_s = 0, depth = Inf, rho_b, theta_v = 0, wsp = 0,
     kd  <- k0 * k / mu_s
     kuw <- k * (1 + u)^k1w * (1 + k2w / mu_s)
     kub <- k * (1 + u)^k1b * (1 + k2b / mu_s)
-    R <- R * (1 - A1 * exp(-(kd + kuw) * depth)) + A2 * rho_b * exp(-(kd +kub) * depth)
+    R   <- R * (1 - A1 * exp(-(kd + kuw) * depth)) + 
+           A2 * rho_b * exp(-(kd +kub) * depth)
   }
 
   return(R)
