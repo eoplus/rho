@@ -39,6 +39,4 @@ take precedence and will be used instead of the matrix columns if specified.
 }
 \seealso{
 \code{\link{gdeconv}}
-
-export
 }

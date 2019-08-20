@@ -118,16 +118,20 @@ gdeconv <- function(spec, sr, start, lower, upper, ef, maxit = 5E4,
 #'
 #' @seealso \code{\link{gdeconv}}
 #'
-#' export
+#' @export
 
 gpeaks <- function(center, sigma, scale, sr, peaks = FALSE) {
 
-  if(dim(center)[2] == 3) {
-    if(missing(sigma)) sigma <- center[, 2]
-    if(missing(scale)) scale <- center[, 3]
-    center <- center[, 1]
+  if(is.matrix(center)) {
+    if(dim(center)[2] == 3) {
+      if(missing(sigma)) sigma <- center[, 2]
+      if(missing(scale)) scale <- center[, 3]
+      center <- center[, 1]
+    } else if(missing(sigma) || missing(scale)) {
+      stop("sigma and scale must be specified if center is not a 3-column matrix")
+    }
   } else if(missing(sigma) || missing(scale)) {
-    stop("sigma and scale must be specified if center is not a 3-column matrix")
+      stop("sigma and scale must be specified if center is not a 3-column matrix")
   }
 
   gauss <- matrix(NA, ncol = length(sr), nrow = length(center))
