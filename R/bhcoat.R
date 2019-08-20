@@ -12,12 +12,15 @@
 #'               medium.
 #' @param no     Refractive index of the outer sphere relative to surrounding 
 #'               medium.
-#' @param lambda Wavelength in free space, in the same units as the radius.
+#' @param lambda Wavelength in the surrounding medium, in the same units as the 
+#'               radius.
 #'
 #' @detail This function is a translation of the BHCOAT FORTRAN subroutine 
-#' published by Bohren & Huffman (1983). The function should not be used for 
-#' large, highly absorbing spheres and will issue a warning if input parameters
-#' describe this condition.
+#' published by Bohren & Huffman (1983). Minor modifications were made, such as 
+#' requiring refractive index and wavelength to be provided relative to the 
+#' surrounding medium. The function should not be used for large, highly 
+#' absorbing spheres and will issue a warning if input parameters describe this 
+#' condition.
 #' 
 #' Note that all parameters must be scalars, while \code{ni} and \code{no} can 
 #' be complex numbers. The refractive indexes should be relative to the 
@@ -45,8 +48,8 @@ bhcoat <- function(ri, ro, ni, no, lambda) {
 
   tol <- 1E-8 # Inner sphere convergency criterion
 
-  x <- 2 * pi * ri * Re(nm) / lambda
-  y <- 2 * pi * ro * Re(nm) / lambda
+  x <- 2 * pi * ri / lambda
+  y <- 2 * pi * ro / lambda
 
   x1 <- ni * x
   x2 <- no * x
@@ -106,7 +109,10 @@ bhcoat <- function(ri, ro, ni, no, lambda) {
       amess4 <- crack * chiy2
     }
 
-    if(abs(amess1) < tol*abs(d1y2) && abs(amess2) < tol && abs(amess3) < tol*abs(d1y2) && abs(amess4) < tol) {
+    if(abs(amess1) < tol * abs(d1y2) && 
+       abs(amess2) < tol && 
+       abs(amess3) < tol * abs(d1y2) && 
+       abs(amess4) < tol) {
       brack <- complex(real = 0., imaginary = 0.)
       crack <- complex(real = 0., imaginary = 0.)
       iflag <- 1
