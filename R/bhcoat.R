@@ -15,7 +15,7 @@
 #' @param lambda Wavelength in the surrounding medium, in the same units as the 
 #'               radius.
 #'
-#' @detail This function is a translation of the BHCOAT FORTRAN subroutine 
+#' @details This function is a translation of the BHCOAT FORTRAN subroutine 
 #' published by Bohren & Huffman (1983). Minor modifications were made, such as 
 #' requiring refractive index and wavelength to be provided relative to the 
 #' surrounding medium. The function should not be used for large, highly 
@@ -151,7 +151,7 @@ bhcoat <- function(ri, ro, ni, no, lambda) {
 
   QSCA  <- (2 / y^2) * QSCA
   QEXT  <- (2 / y^2) * QEXT
-  QBACK <- (1/ y^2) * XBACK * Conj(XBACK)
+  QBACK <- (1/ y^2)  * abs(XBACK)^2 #XBACK * Conj(XBACK)
   QABS  <- QEXT - QSCA
 
   Q <- c(QEXT, QABS, QSCA, QBACK)

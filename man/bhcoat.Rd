@@ -29,6 +29,19 @@ This function calculates the efficiency factors of extinction, absorption,
 scattering and backscattering for particle consisting of two concentric 
 spheres.
 }
+\details{
+This function is a translation of the BHCOAT FORTRAN subroutine 
+published by Bohren & Huffman (1983). Minor modifications were made, such as 
+requiring refractive index and wavelength to be provided relative to the 
+surrounding medium. The function should not be used for large, highly 
+absorbing spheres and will issue a warning if input parameters describe this 
+condition.
+
+Note that all parameters must be scalars, while \code{ni} and \code{no} can 
+be complex numbers. The refractive indexes should be relative to the 
+surrounding medium (water) and \code{lambda} be in the same units as the 
+radius of the concentric spheres.
+}
 \examples{
 ni  <-  complex(real = 1.02, imaginary = 0.006)
 no  <-  complex(real = 1.10, imaginary = 0.0)
