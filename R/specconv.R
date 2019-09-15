@@ -30,22 +30,21 @@ specconv <- function(spec, rsrf) {
     stop('spec (and rsrf) must be a matrix')
   }
 
-  for(i in 2:ncol(srf)) {
-    specs_c[i-1, 1] <- sum(srf[, 1] * srf[, i], na.rm = T) / 
-                       sum(srf[, i], na.rm = T)
+  specs_c <- matrix(NA, nrow = ncol(rsrf) - 1, ncol = ncol(spec))
+  colnames(specs_c) <- colnames(spec)
+  for(i in 2:ncol(rsrf)) {
+    specs_c[i-1, 1] <- sum(rsrf[, 1] * rsrf[, i], na.rm = T) / 
+                       sum(rsrf[, i], na.rm = T)
    }
 
-  specs_c <- matrix(NA, nrow = ncol(srf) - 1, ncol = ncol(specs))
-  colnames(specs_c) <- colnames(specs)
-  srf <- .approxt(srf, specs[, 1])
-
-  for(j in 2:ncol(specs)) {
-    for(i in 2:ncol(srf)) {
-      if(sum(is.na(specs[, j] * srf[, i])) == nrow(specs)) {
+  rsrf <- .approxt(rsrf, spec[, 1])
+  for(j in 2:ncol(spec)) {
+    for(i in 2:ncol(rsrf)) {
+      if(sum(is.na(spec[, j] * rsrf[, i])) == nrow(spec)) {
         specs_c[i-1, j] <- NA
        } else {
-        specs_c[i-1, j] <- sum(specs[, j] * srf[, i], na.rm = T) / 
-                           sum(srf[, i], na.rm = T)
+        specs_c[i-1, j] <- sum(spec[, j] * rsrf[, i], na.rm = T) / 
+                           sum(rsrf[, i], na.rm = T)
        }
      }
    }

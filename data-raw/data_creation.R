@@ -1,6 +1,6 @@
 
 devtools::load_all()
-
+library(devtools)
 #
 # Pure (saline) water absorption
 #
@@ -57,3 +57,9 @@ rsrf[['ps']][['0e']]    <- srf_0e_ps_iob_mm
 rsrf[['ps']][['0f10']]  <- srf_0f10_ps_iob_mm
 devtools::use_data(rsrf, overwrite = TRUE)
 
+#
+# Water NIR similarity spectrum
+#
+
+water_nir_sim <- read.csv('ruddick_nir_similarity_spec.csv')
+devtools::use_data(water_nir_sim, overwrite = TRUE)
