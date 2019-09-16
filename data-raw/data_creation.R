@@ -55,7 +55,7 @@ rsrf[['ps']] <- list()
 rsrf[['ps']][['0c0d']]  <- srf_0c0d_ps_iob_mm
 rsrf[['ps']][['0e']]    <- srf_0e_ps_iob_mm
 rsrf[['ps']][['0f10']]  <- srf_0f10_ps_iob_mm
-devtools::use_data(rsrf, overwrite = TRUE)
+use_data(rsrf, overwrite = TRUE)
 
 #
 # Water NIR similarity spectrum
