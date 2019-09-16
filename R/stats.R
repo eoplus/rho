@@ -39,7 +39,7 @@ rstat <- function(x, y, units = '') {
   rmse <- sqrt(mean((ymx)^2, na.rm = TRUE))
   r2   <- cor(x, y, use = "complete.obs")^2 # since is a simple linear model (1:1)
   n    <- nrow(na.omit(cbind(x, y)))
-  rang <- range(x, na.rm = T) 
+  rang <- range(na.omit(cbind(x, y))[, 1], na.rm = T) 
   res  <- list(mape = mape, bias = bias, rmse = rmse, r2 = r2, n = n, 
                rang = rang, units = units)
   return(res)
