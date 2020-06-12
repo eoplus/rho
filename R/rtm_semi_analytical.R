@@ -267,7 +267,7 @@ rta_sa <- function(a, bb, ... ){#theta_s = 0, depth = Inf, rho_b, theta_v = 0, w
 
 }
 
-#' Propagates reflectance across a boundary
+#' Propagates reflectance across air-water interface
 #'
 #' This function propagates the reflectance across the air-water interface.
 #'
@@ -279,7 +279,30 @@ rta_sa <- function(a, bb, ... ){#theta_s = 0, depth = Inf, rho_b, theta_v = 0, w
 #' scaling of the reflectance signal just above or just below the water surface.
 #' The base equation and data is described in Gordon et al. (1988).
 #'
+#' Irradiance reflectance just above the water surface (R(+)) is related to the 
+#' irradiance reflectance just below the water surface (R(-)) by:
+#'
+#' R(+) = t(Lu) * (na/nw)^2 * t(Ed) * R(-) / (1 - r(Eu) * R(-)),
+#'
+#' where t(Lu) is the transmittance of in water upwelling radiance to air, 
+#' (na/nw)^2 takes in account the radiance invariance law, t(Ed) in the 
+#' transmittance of the in air downwelling irradiance to water and r(Eu) is the
+#' reflectance of the in water upwelling radiance by the interface. A similar 
+#' relation is found for Rrs(+) and rrs(-) by including the factor 1/Q, where Q
+#' is the relation Eu/Lu. The interface transmittance and reflection 
+#' coefficients depend on its roughness and the directional irradiance 
+#' distribution (Gordon 2005) and on the wavelength dependent refractive indexes 
+#' of air and water (Voss & Flora, 2017).
+#'
 #' @references
+#' Voss, K. J.; Flora, S. 2017. Spectral dependence of the seawater-air radiance 
+#' transmission coefficient. Journal of Atmospheric and Oceanic Technology 34, 
+#' 6, 1203-1205. DOI: 10.1175/JTECH-D-17-0040.1
+#'
+#' Gordon, H. R.. 2005. Normalized water-leaving radiance: Revisiting the 
+#' influence of surface roughness. Applied Optics, 44, 241-248. 
+#' DOI: 10.1364/AO.44.000241
+#'
 #' Gordon, H. R.; Brown, O. B.; Evans, R. H.; Brown, J. W.; Smith, R. C.; Baker, 
 #' K. S.; Clark, D. K. 1988. A semianalytic radiance model ofocean color. 
 #' Journal of Geophysical Research 93, 10, 909-10.924. DOI: 
@@ -298,13 +321,14 @@ rta_sa <- function(a, bb, ... ){#theta_s = 0, depth = Inf, rho_b, theta_v = 0, w
 #'
 #' @export
 
-propagate_r <- function(r, to = c("air", "water")) {
+propagate_r <- function(r, to = c("air", "water"), aop = c('rrs', 'rho')) {
 
   if(to != "air" && to != "water")
     stop("to must be one of 'air' or 'water'")
 
+  gamma <- ifelse(aop == 'rrs', 1.562, 0.48)
   if(to == "air") {
-    R <- 0.518 * r / (1 - 1.562 * r)
+    R <- 0.518 * r / (1 - gamma * r)
   } else {
     R <- r / (0.518 + 1.7 * r)
   }

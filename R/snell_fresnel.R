@@ -192,8 +192,8 @@ fresnel <- function(thetai, thetar, ni, nr, fp = 0.5, ave = FALSE) {
   if(any(fp < 0) || any(fp > 1))
     stop("Fraction of parallel polarization radiation must be between 0 and 1")
 
-  R_p <- fresnel_p(thetai = thetai, thetar = thetar, ni = ni, nr = nr)
-  R_s <- fresnel_p(thetai = thetai, thetar = thetar, ni = nr, nr = ni)
+  R_p <- .fresnel_p(thetai = thetai, thetar = thetar, ni = ni, nr = nr)
+  R_s <- .fresnel_p(thetai = thetai, thetar = thetar, ni = nr, nr = ni)
 
   if(ave) { 
     return(R_p * fp + R_s * (1 - fp))
