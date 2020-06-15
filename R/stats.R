@@ -34,12 +34,13 @@
 
 rstat <- function(x, y, units = '') {
   res  <- y - x
-  rss  <- sum(res^2)
-  mss  <- sum(x^2)
   mape <- mean(abs(res / x), na.rm = TRUE) * 100
   bias <- mean(res / x, na.rm = TRUE) * 100
   rmse <- sqrt(mean(res^2, na.rm = TRUE))
 #  r2   <- 1 - (sum(ymx^2, na.rm = T)/(sum((y - mean(y, na.rm = T))^2, na.rm = T)))
+  xy   <- na.omit(cbind(x, y))
+  rss  <- sum((xy[, 2] - xy[, 1])^2)
+  mss  <- sum(xy[, 1]^2)
   r2   <- mss / (mss + rss)
   n    <- nrow(na.omit(cbind(x, y)))
   rang <- range(na.omit(cbind(x, y))[, 1], na.rm = T) 
