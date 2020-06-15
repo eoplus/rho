@@ -4,8 +4,17 @@
 \alias{adeconv}
 \title{Absorption band deconvolution}
 \usage{
-adeconv(spec, sr, start, lower, upper, ef, model = c("Gauss", "Lorentz",
-  "Voigt"), maxit = 50000, reltol = 1e-12)
+adeconv(
+  spec,
+  sr,
+  start,
+  lower,
+  upper,
+  ef,
+  model = c("Gauss", "Lorentz", "Voigt"),
+  maxit = 50000,
+  reltol = 1e-12
+)
 }
 \arguments{
 \item{spec}{A vector with the spectra to be deconvolved.}

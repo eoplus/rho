@@ -4,8 +4,15 @@
 \alias{apeaks}
 \title{Calculate absorption spectra}
 \usage{
-apeaks(center, sigma, hwhm, scale, sr, model = c("Gauss", "Lorentz",
-  "Voigt"), peaks = FALSE)
+apeaks(
+  center,
+  sigma,
+  hwhm,
+  scale,
+  sr,
+  model = c("Gauss", "Lorentz", "Voigt"),
+  peaks = FALSE
+)
 }
 \arguments{
 \item{center}{Center position reference of each absorption band.}

@@ -26,7 +26,7 @@ a vector of expressions for plot legend.
 }
 \description{
 The function calculates useful descriptive statistics to evaluate the 
-inversions and create a vector of strings for plotting.
+estimation and create a vector of strings for plotting.
 }
 \details{
 Those functions are wrappers for descriptive statistics and 

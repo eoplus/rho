@@ -32,12 +32,12 @@
 #'
 #' @export
 
-rstat <- function(x, y, yp, units = '') {
+rstat <- function(x, y, units = '') {
   ymx  <- y - x
   mape <- mean(abs(ymx / x), na.rm = TRUE) * 100
   bias <- mean((ymx) / x, na.rm = TRUE) * 100
   rmse <- sqrt(mean((ymx)^2, na.rm = TRUE))
-  r2   <- 1 - (sum(ymx^2, na.rm = T)/(sum((x - mean(x, na.rm = T))^2, na.rm = T)))
+  r2   <- 1 - (sum(ymx^2, na.rm = T)/(sum((y - mean(y, na.rm = T))^2, na.rm = T)))
   n    <- nrow(na.omit(cbind(x, y)))
   rang <- range(na.omit(cbind(x, y))[, 1], na.rm = T) 
   res  <- list(mape = mape, bias = bias, rmse = rmse, r2 = r2, n = n, 
