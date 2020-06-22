@@ -78,7 +78,7 @@ rstat <- function(x, y, log = FALSE, ux = FALSE, units = '') {
     if(ux) {
       norm <- apply(xy, 1, mean)
     } else {
-      norm <- x
+      norm <- xy[, 1]
     }
 
     mapd <- mean(abs(d / norm), na.rm = TRUE) * 100
