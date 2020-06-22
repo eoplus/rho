@@ -5,7 +5,7 @@
 \alias{lstat}
 \title{Calculate retrieval statistics}
 \usage{
-rstat(x, y, units = "")
+rstat(x, y, log = FALSE, ux = FALSE, units = "")
 
 lstat(stats, digits = 3)
 }
@@ -13,6 +13,10 @@ lstat(stats, digits = 3)
 \item{x}{Reference data.}
 
 \item{y}{Estimated data.}
+
+\item{log}{Logical. Should log based performance statistics be computed?}
+
+\item{ux}{Logical. Calculate unbiased differences?}
 
 \item{units}{Units of the data.}
 
@@ -33,13 +37,26 @@ Those functions are wrappers for descriptive statistics and
 convenient text strings for addition to a plot. They provide the statistics 
 of the agreement of the estimated data against the reference data; i.e.
 evaluates estimations against the 1:1 relation. Statistics include the mean 
-absolute percentage error (MAPE), the mean percentage error (bias), the root 
-mean squared error (RMSE), the coefficient of determination (R^2), the number
-of data points, and the range of the reference data.
+absolute percentage difference (MAPD), the mean percentage error (bias), the 
+root mean squared difference (RMSD), the coefficient of determination (R^2), 
+the number of data points, and the range of the reference data.
 
-The parameter units is also available for convenience of use with the
+The parameter 'units' is also available for convenience of use with the
 \code{lstats} function, to add those statistics to a plot. It should be a 
 character string that can be used in expressions. See examples.
+
+When x does not present smaller uncertainty than y, ux can be set to TRUE to 
+calculate unbiased statistics in linear space. In that case, the normalization 
+of MAPD and bias is not on x by on the average of x and y. This approach 
+might also be used if some values are very close to zero.
+
+For heterocedastic data or data spanning multiple orders of magnitude, log 
+can be set to TRUE to calculate performance statistics in log space. Note 
+in this case the units are set to '' (unitless). The MAPD and bias are 
+retrieved in % with:
+
+MAPD = 100 * (10^((1 / n) * sum(|log10(x) - log10(y)|)) - 1)
+Bias = 100 * (10^((1 / n) * sum(log10(x) - log10(y))) - 1)
 }
 \examples{
 x <- 1:10
@@ -48,4 +65,9 @@ y <- x + rnorm(10)
 plot(x, y)
 legend("bottomright", lstat(rs), bty = "n")
 
+}
+\references{
+IOCCG. 2019. Uncertainties in Ocean Colour Remote Sensing. Mélin F. (ed.), 
+  IOCCG Report Series, No. 18, International Ocean Colour Coordinating Group, 
+  Dartmouth, Canada. http://dx.doi.org/10.25607/OBP-696
 }

@@ -6,22 +6,42 @@
 #'
 #' @param x     Reference data.
 #' @param y     Estimated data.
+#' @param log   Logical. Should log based performance statistics be computed?
+#' @param ux    Logical. Calculate unbiased differences?
 #' @param units Units of the data.
 #'
 #' @details Those functions are wrappers for descriptive statistics and 
 #' convenient text strings for addition to a plot. They provide the statistics 
 #' of the agreement of the estimated data against the reference data; i.e.
 #' evaluates estimations against the 1:1 relation. Statistics include the mean 
-#' absolute percentage error (MAPE), the mean percentage error (bias), the root 
-#' mean squared error (RMSE), the coefficient of determination (R^2), the number
-#' of data points, and the range of the reference data.
+#' absolute percentage difference (MAPD), the mean percentage error (bias), the 
+#' root mean squared difference (RMSD), the coefficient of determination (R^2), 
+#' the number of data points, and the range of the reference data.
 #'
-#' The parameter units is also available for convenience of use with the
+#' The parameter 'units' is also available for convenience of use with the
 #' \code{lstats} function, to add those statistics to a plot. It should be a 
 #' character string that can be used in expressions. See examples.
 #'
+#' When x does not present smaller uncertainty than y, ux can be set to TRUE to 
+#' calculate unbiased statistics in linear space. In that case, the normalization 
+#' of MAPD and bias is not on x by on the average of x and y. This approach 
+#' might also be used if some values are very close to zero.
+#'
+#' For heterocedastic data or data spanning multiple orders of magnitude, log 
+#' can be set to TRUE to calculate performance statistics in log space. Note 
+#' in this case the units are set to '' (unitless). The MAPD and bias are 
+#' retrieved in % with:
+#'
+#' MAPD = 100 * (10^((1 / n) * sum(|log10(x) - log10(y)|)) - 1)
+#' Bias = 100 * (10^((1 / n) * sum(log10(x) - log10(y))) - 1)
+#'
 #' @return A named list with component statistics and units for \code{rstat} and 
 #' a vector of expressions for plot legend.
+#'
+#' @references
+#' IOCCG. 2019. Uncertainties in Ocean Colour Remote Sensing. Mélin F. (ed.), 
+#'   IOCCG Report Series, No. 18, International Ocean Colour Coordinating Group, 
+#'   Dartmouth, Canada. http://dx.doi.org/10.25607/OBP-696
 #'
 #' @examples
 #' x <- 1:10
@@ -32,21 +52,45 @@
 #'
 #' @export
 
-rstat <- function(x, y, units = '') {
-  res  <- y - x
-  mape <- mean(abs(res / x), na.rm = TRUE) * 100
-  bias <- mean(res / x, na.rm = TRUE) * 100
-  rmse <- sqrt(mean(res^2, na.rm = TRUE))
-#  r2   <- 1 - (sum(ymx^2, na.rm = T)/(sum((y - mean(y, na.rm = T))^2, na.rm = T)))
-  xy   <- na.omit(cbind(x, y))
-  rss  <- sum((xy[, 2] - xy[, 1])^2)
+rstat <- function(x, y, log = FALSE, ux = FALSE, units = '') {
+
+  if(log) {
+
+    if(ux)
+      warning("Performance statistics in log space do not include normalization")
+
+    x  <- log10(x)
+    y  <- log10(y)
+    xy <- na.omit(cbind(x, y))
+    d  <- xy[, 2] - xy[, 1]
+
+    mapd <- 100 * (10^mean(abs(d), na.rm = TRUE) - 1)
+    bias <- 100 * (10^mean(d, na.rm = TRUE) - 1)
+
+  } else {
+
+    xy <- na.omit(cbind(x, y))
+    d  <- xy[, 2] - xy[, 1]
+    if(ux) {
+      norm <- apply(xy, 1, mean)
+    } else {
+      norm <- x
+    }
+
+    mapd <- mean(abs(d / norm), na.rm = TRUE) * 100
+    bias <- mean(d / norm, na.rm = TRUE) * 100
+  }
+
+  rmsd <- sqrt(mean(d^2, na.rm = TRUE))
+  rss  <- sum(d^2)
   mss  <- sum(xy[, 1]^2)
   r2   <- mss / (mss + rss)
-  n    <- nrow(na.omit(cbind(x, y)))
-  rang <- range(na.omit(cbind(x, y))[, 1], na.rm = T) 
-  res  <- list(mape = mape, bias = bias, rmse = rmse, r2 = r2, n = n, 
+  n    <- nrow(xy)
+  rang <- range(xy[, 1], na.rm = T) 
+  res  <- list(mapd = mapd, bias = bias, rmsd = rmsd, r2 = r2, n = n, 
                rang = rang, units = units)
-  return(res)
+  res
+
 }
 
 #' @rdname rstat
@@ -62,13 +106,13 @@ lstat <- function(stats, digits = 3) {
             env = list(r2 = round(stats$r2, digits))) %>% 
           eval()
 
-  rmse <- substitute(expression(RMSE == rmse~units),
-            list(rmse = round(stats$rmse, digits), 
+  rmsd <- substitute(expression(RMSD == rmsd~units),
+            list(rmsd = round(stats$rmsd, digits), 
             units = stats$units)) %>%
           eval()
 
-  mape <- substitute(expression(MAPE == mape~"%"),
-            list(mape = round(stats$mape, digits))) %>%
+  mapd <- substitute(expression(MAPD == mapd~"%"),
+            list(mapd = round(stats$mapd, digits))) %>%
           eval()
 
   bias <- substitute(expression(Bias == bias~"%"),
