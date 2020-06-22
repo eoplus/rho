@@ -42,6 +42,10 @@
 #' IOCCG. 2019. Uncertainties in Ocean Colour Remote Sensing. Mélin F. (ed.), 
 #'   IOCCG Report Series, No. 18, International Ocean Colour Coordinating Group, 
 #'   Dartmouth, Canada. http://dx.doi.org/10.25607/OBP-696
+#' Seegers, B. N.; Stumpf, R. P.; Schaeffer, B. A.; Loftin, K. A.; Werdell, P. 
+#'   J. 2018. Performance metrics for the assessment of satellite data products: 
+#'   an ocean color case study. Optics Express 26, 6, 7404. 
+#'   DOI: 10.1364/OE.26.007404
 #'
 #' @examples
 #' x <- 1:10
@@ -127,7 +131,7 @@ lstat <- function(stats, digits = 3) {
             b = round(stats$rang[2], digits), units = stats$units)) %>%
           eval()
 
-  ltext <- c(r2, rmse, mape, bias, n, rang)
+  ltext <- c(r2, rmsd, mapd, bias, n, rang)
 
   return(ltext)
 
