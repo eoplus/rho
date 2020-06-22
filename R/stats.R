@@ -70,6 +70,7 @@ rstat <- function(x, y, log = FALSE, ux = FALSE, units = '') {
 
     mapd <- 100 * (10^mean(abs(d), na.rm = TRUE) - 1)
     bias <- 100 * (10^mean(d, na.rm = TRUE) - 1)
+    rang <- range(10^xy[, 1], na.rm = T)
 
   } else {
 
@@ -92,7 +93,7 @@ rstat <- function(x, y, log = FALSE, ux = FALSE, units = '') {
   n    <- nrow(xy)
   rang <- range(xy[, 1], na.rm = T) 
   res  <- list(mapd = mapd, bias = bias, rmsd = rmsd, r2 = r2, n = n, 
-               rang = rang, units = units)
+               rang = rang, units = units, log = TRUE)
   res
 
 }
@@ -112,7 +113,7 @@ lstat <- function(stats, digits = 3) {
 
   rmsd <- substitute(expression(RMSD == rmsd~units),
             list(rmsd = round(stats$rmsd, digits), 
-            units = stats$units)) %>%
+            units = ifelse(stats$log, "", stats$units))) %>%
           eval()
 
   mapd <- substitute(expression(MAPD == mapd~"%"),
