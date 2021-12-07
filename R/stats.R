@@ -87,8 +87,8 @@ rstat <- function(x, y, log = FALSE, ux = FALSE, units = '') {
 
   rmsd <- sqrt(mean(d^2, na.rm = TRUE))
   rss  <- sum(d^2)
-  mss  <- sum(xy[, 1]^2)
-  r2   <- mss / (mss + rss)
+  tss  <- sum((xy[, 1] - mean(xy[, 1]))^2)
+  r2   <- 1 - rss/tss
   n    <- nrow(xy)
   rang <- range(xy[, 1], na.rm = T) 
   res  <- list(mapd = mapd, bias = bias, rmsd = rmsd, r2 = r2, n = n, 
