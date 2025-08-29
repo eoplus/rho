@@ -94,7 +94,7 @@ adeconv <- function(spec, sr, start, lower, upper, ef, model = c('Gauss',
   }
 
   # Prefit:
-  start[, 3] <- optim(par = start[, 3], fn = fn, center = start[, 1], 
+  start[, 3] <- stats::optim(par = start[, 3], fn = fn, center = start[, 1], 
                       sigma = start[, 2], sr = sr, spec = spec, ef = ef, 
                       l = lower, u = upper, model = model, pre = TRUE, 
                       method = "Nelder-Mead", control = list(maxit = maxit, 
@@ -102,7 +102,7 @@ adeconv <- function(spec, sr, start, lower, upper, ef, model = c('Gauss',
                       4, 2)])$par
 
   # Fit:
-  opt        <- optim(par = as.vector(start), fn = fn, sr = sr, spec = spec, 
+  opt        <- stats::optim(par = as.vector(start), fn = fn, sr = sr, spec = spec, 
                       ef = ef, l = lower, u = upper, model = model, pre = FALSE, 
                       method = "Nelder-Mead", control = list(maxit = maxit, 
                       reltol = reltol))

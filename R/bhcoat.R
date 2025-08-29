@@ -39,7 +39,7 @@
 #' no  <-  complex(real = 1.10, imaginary = 0.0)
 #' bhcoat(ri = 5, ro = 5.2, ni = ni, no = no, lambda = 0.675)
 #'
-#' 
+#' @export
 
 bhcoat <- function(ri, ro, ni, no, lambda) {
 

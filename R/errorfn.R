@@ -23,7 +23,7 @@
 mlrt <- function(x, y, w = rep(1, length(x))) {
   log(y / x) %>%
   abs() %>%
-  weighted.mean(w, na.rm = T)
+  stats::weighted.mean(w, na.rm = T)
 }
 
 #' @rdname mlrt
@@ -32,7 +32,7 @@ mlrt <- function(x, y, w = rep(1, length(x))) {
 
 mard <- function(x, y, w = rep(1, length(x))) {
   abs((y - x) / x) %>%
-  weighted.mean(w, na.rm = T)
+  stats::weighted.mean(w, na.rm = T)
 }
 
 #' @rdname mlrt
@@ -41,7 +41,7 @@ mard <- function(x, y, w = rep(1, length(x))) {
 
 rmsd <- function(x, y, w = rep(1, length(x))) {
   (y - x)^2 %>%
-  weighted.mean(w, na.rm = T) %>%
+  stats::weighted.mean(w, na.rm = T) %>%
   sqrt()
 }
 

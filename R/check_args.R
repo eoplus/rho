@@ -1,7 +1,7 @@
 
-#' Will return TRUE if the condition is NOT met. Condition is that the lengths 
-#' of all vector arguments must be an iteger multiple of the the length of the
-#' longer vector.
+# Will return TRUE if the condition is NOT met. Condition is that the lengths 
+# of all vector arguments must be an integer multiple of the the length of the
+# longer vector.
 
 .check_vect_args <- function(arg_ls) {
   arg_lngth <- lengths(arg_ls)

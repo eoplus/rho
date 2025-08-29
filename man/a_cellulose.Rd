@@ -4,7 +4,9 @@
 \name{a_cellulose}
 \alias{a_cellulose}
 \title{Specific absorption coefficient of cellulose}
-\format{An object of class \code{data.frame} with 421 rows and 2 columns.}
+\format{
+An object of class \code{data.frame} with 421 rows and 2 columns.
+}
 \source{
 PROSPEC source code, Version 2.01, 1995.
 }

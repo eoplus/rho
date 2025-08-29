@@ -57,7 +57,7 @@ specconv <- function(spec, rsrf) {
   xys_i <- matrix(NA, ncol = ncol(xys), nrow = length(xout))
   xys_i[, 1] <- xout
   for(i in 2:nc)
-    xys_i[, i] <- approx(x = xys[, 1], y = xys[, i], xout)$y
+    xys_i[, i] <- stats::approx(x = xys[, 1], y = xys[, i], xout)$y
   colnames(xys_i) <- colnames(xys)
   return(xys_i)
  }

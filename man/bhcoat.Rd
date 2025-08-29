@@ -47,7 +47,6 @@ ni  <-  complex(real = 1.02, imaginary = 0.006)
 no  <-  complex(real = 1.10, imaginary = 0.0)
 bhcoat(ri = 5, ro = 5.2, ni = ni, no = no, lambda = 0.675)
 
-
 }
 \references{
 Bohren, C. F.; Huffman, D. R. 1983. Absorption and Scattering of Light by 

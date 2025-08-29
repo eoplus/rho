@@ -45,9 +45,9 @@ a_water <- function(lambda, S = 0, Tc = 20) {
   if(any(lambda < 300) || any(lambda > 4000))
     stop("Requested wavelength outside data domain: [300,4000] (nm)")
 
-  a    <- approx(a_water_wopp[, 1], a_water_wopp[, 2], xout = lambda)$y
-  dads <- approx(a_water_wopp[, 1], a_water_wopp[, 3], xout = lambda)$y
-  dadt <- approx(a_water_wopp[, 1], a_water_wopp[, 4], xout = lambda)$y
+  a    <- stats::approx(a_water_wopp[, 1], a_water_wopp[, 2], xout = lambda)$y
+  dads <- stats::approx(a_water_wopp[, 1], a_water_wopp[, 3], xout = lambda)$y
+  dadt <- stats::approx(a_water_wopp[, 1], a_water_wopp[, 4], xout = lambda)$y
 
   a <- a + (Tc - 20) * dadt + S * dads
 
@@ -105,7 +105,7 @@ a_water <- function(lambda, S = 0, Tc = 20) {
 #' vsf_water(lambda = 550, S = 34.72, Tc = 3.5, psi = psi)
 #'
 #' # Retrieve the scattering coefficient of average seawater in the visible 
-#' range:
+#' # range:
 #' b_water(lambda = 400:700, S = 34.72, Tc = 3.5)
 #'
 #' @export
@@ -138,7 +138,7 @@ b_water <- function(lambda, S = 0, Tc = 20, P = 0) {
 
 }
 
-#' Volume scattering at 90 degrees (m^-1 sr^-1)
+# Volume scattering at 90 degrees (m^-1 sr^-1)
 
 .beta_water_90 <- function(lambda, S = 0, Tc = 20, P = 0) {
 
@@ -170,8 +170,8 @@ b_water <- function(lambda, S = 0, Tc = 20, P = 0) {
 
 }
 
-#' Partial derivative of seawater refractive index with respect to salinity, 
-#' dn/dS. Based on Quan & Fry (1995).
+# Partial derivative of seawater refractive index with respect to salinity, 
+# dn/dS. Based on Quan & Fry (1995).
 
 .dnds <- function(lambda, Tc) {
 
@@ -188,9 +188,9 @@ b_water <- function(lambda, S = 0, Tc = 20, P = 0) {
 
 }
 
-#' Partial derivative of the natural logarithm of solvent activity with respect 
-#' to salinity, dln(a0)/dS is from Millero & Leung (1976). Has an estimated 
-#' error of 0.04%.
+# Partial derivative of the natural logarithm of solvent activity with respect 
+# to salinity, dln(a0)/dS is from Millero & Leung (1976). Has an estimated 
+# error of 0.04%.
 
 .dlna0dS <- function(S, Tc) {
 
@@ -216,5 +216,3 @@ b_water <- function(lambda, S = 0, Tc = 20, P = 0) {
   return(dlna0dS)
 
 }
-
-

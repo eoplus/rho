@@ -4,7 +4,9 @@
 \name{water_nir_sim}
 \alias{water_nir_sim}
 \title{NIR water similarity spectrum}
-\format{An object of class \code{data.frame} with 101 rows and 4 columns.}
+\format{
+An object of class \code{data.frame} with 101 rows and 4 columns.
+}
 \usage{
 water_nir_sim
 }

@@ -31,7 +31,7 @@ Otherwise a matrix is returned.
 }
 \examples{
 # Retrieve the average real part of the refractive index of quartz in the 
-visible range:
+# visible range:
 n_quartz(lambda = 400:700)
 
 }

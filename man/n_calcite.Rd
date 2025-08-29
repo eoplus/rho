@@ -31,7 +31,7 @@ Otherwise a matrix is returned.
 }
 \examples{
 # Retrieve the average real part of the refractive index of calcite in the 
-visible range:
+# visible range:
 n_calcite(lambda = 400:700)
 
 }

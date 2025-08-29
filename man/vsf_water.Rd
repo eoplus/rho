@@ -64,7 +64,7 @@ psi <- seq(0, pi, length.out = 180)
 vsf_water(lambda = 550, S = 34.72, Tc = 3.5, psi = psi)
 
 # Retrieve the scattering coefficient of average seawater in the visible 
-range:
+# range:
 b_water(lambda = 400:700, S = 34.72, Tc = 3.5)
 
 }

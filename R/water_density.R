@@ -68,7 +68,7 @@ d_water <- function(Tc = 20, S = 0, P = 0) {
 
 }
 
-#' Secant bulk modus of pure seawater:
+# Secant bulk modus of pure seawater:
 
 .K_w <- function(Tc, S, P) {
 

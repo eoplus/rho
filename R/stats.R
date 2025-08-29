@@ -65,7 +65,7 @@ rstat <- function(x, y, log = FALSE, ux = FALSE, units = '') {
 
     x  <- log10(x)
     y  <- log10(y)
-    xy <- na.omit(cbind(x, y))
+    xy <- stats::na.omit(cbind(x, y))
     d  <- xy[, 2] - xy[, 1]
 
     mapd <- 100 * (10^mean(abs(d), na.rm = TRUE) - 1)
@@ -73,7 +73,7 @@ rstat <- function(x, y, log = FALSE, ux = FALSE, units = '') {
 
   } else {
 
-    xy <- na.omit(cbind(x, y))
+    xy <- stats::na.omit(cbind(x, y))
     d  <- xy[, 2] - xy[, 1]
     if(ux) {
       norm <- apply(xy, 1, mean)

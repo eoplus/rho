@@ -4,12 +4,14 @@
 \alias{propagate_r}
 \title{Propagates reflectance across air-water interface}
 \usage{
-propagate_r(r, to = c("air", "water"), aop = c("rrs", "rho"))
+propagate_r(x, to = c("air", "water"), aop = c("rrs", "rho"))
 }
 \arguments{
-\item{r}{Reflectance (unitless or 1/sr).}
+\item{x}{Reflectance (unitless or 1/sr).}
 
 \item{to}{One of: "air" or "water".}
+
+\item{aop}{One of: "rrs" or "rho".}
 }
 \description{
 This function propagates the reflectance across the air-water interface.
@@ -18,31 +20,50 @@ This function propagates the reflectance across the air-water interface.
 This function applies the average coefficients for water 
 transmittance and refractive index of water relative to air to calculate the
 scaling of the reflectance signal just above or just below the water surface.
-The base equation and data is described in Gordon et al. (1988).
+The base equation and data is described in Gordon et al. (1988) and Gordon 
+and Voss (2018).
 
-Irradiance reflectance just above the water surface (R(+)) is related to the 
-irradiance reflectance just below the water surface (R(-)) by:
+The basic relation between the bi-hemispherical reflectances just above the 
+water R(+) and just below the water R(-) is:
 
-R(+) = t(Lu) * (na/nw)^2 * t(Ed) * R(-) / (1 - r(Eu) * R(-)),
+R(+) = t(Eu) * t(Ed) * R(-) / (1 - r(Eu) * R(-)),                       (1)
+
+where t(Eu) is the transmittance of in water upwelling irradiance to air, 
+t(Ed) in the transmittance of the in air downwelling irradiance to water 
+and r(Eu) is the reflectance of the in water upwelling radiance by the 
+interface. Note that t(Eu) = 1 - r(Eu)
+
+Since the hemispherical-direction reflectance just below the water rrs(-) 
+is:
+
+rrs(-) = Lu(-)/Eu(-) = R(-)/Q,                                          (2)
+
+Equation (1) can be modified to retrieve the hemispherical-direction 
+reflectance just above the water Rrs(+) directly from R(-):
+
+Rrs(+) = (na/nw)^2 * t(Lu) * t(Ed) * R(-) / Q * (1 - r(Eu) * R(-)),     (3)
 
 where t(Lu) is the transmittance of in water upwelling radiance to air, 
-(na/nw)^2 takes in account the radiance invariance law, t(Ed) in the 
-transmittance of the in air downwelling irradiance to water and r(Eu) is the
-reflectance of the in water upwelling radiance by the interface. A similar 
-relation is found for Rrs(+) and rrs(-) by including the factor 1/Q, where Q
-is the relation Eu/Lu. The interface transmittance and reflection 
-coefficients depend on its roughness and the directional irradiance 
-distribution (Gordon 2005) and on the wavelength dependent refractive indexes 
-of air and water (Voss & Flora, 2017).
+(na/nw)^2 takes in account the radiance invariance law, and Q is the ratio 
+Lu/Eu underwater. Equation (3) can also be expressed directly in terms of
+rrs(-):
+
+Rrs(+) = (na/nw)^2 * t(Lu) * t(Ed) * rrs(-) / (1 - r(Eu) * Q * rrs(-)). (4)
+
+While those equations are exact, the factors Q, t(Lu), t(Eu), t(Ed), na, and 
+nw are not constants but will depend on wavelength, interface roughness, 
+downwelling radiance distribution, and inherent optical properties of the 
+water (Gordon 2005; Voss & Flora, 2017). Therefore, average values are used
+for those factors.
 }
 \references{
-Voss, K. J.; Flora, S. 2017. Spectral dependence of the seawater-air radiance 
-transmission coefficient. Journal of Atmospheric and Oceanic Technology 34, 
-6, 1203-1205. DOI: 10.1175/JTECH-D-17-0040.1
-
-Gordon, H. R.. 2005. Normalized water-leaving radiance: Revisiting the 
+Gordon, H. R. 2005. Normalized water-leaving radiance: Revisiting the 
 influence of surface roughness. Applied Optics, 44, 241-248. 
 DOI: 10.1364/AO.44.000241
+
+Gordon, H. R.; Voss, K. J. 2018. New theoretical formulation for the 
+determination of radiance transmittance at the water-air interface: comment.
+Optics Express 26, 19137-19139. DOI: 10.1364/OE.26.019137
 
 Gordon, H. R.; Brown, O. B.; Evans, R. H.; Brown, J. W.; Smith, R. C.; Baker, 
 K. S.; Clark, D. K. 1988. A semianalytic radiance model ofocean color. 
@@ -57,6 +78,10 @@ Lee, Z.-P.; Carder, K. L.; Arnone, R. A. 2002. Deriving inherent optical
 properties from water color: a multiband quasi-analytical algorithm for 
 optically deep waters. Applied Optics 41, 27, 5755-5772. DOI: 
 10.1364/AO.41.005755
+
+Voss, K. J.; Flora, S. 2017. Spectral dependence of the seawater-air radiance 
+transmission coefficient. Journal of Atmospheric and Oceanic Technology 34, 
+6, 1203-1205. DOI: 10.1175/JTECH-D-17-0040.1
 }
 \seealso{
 \code{\link{rta_sa}}

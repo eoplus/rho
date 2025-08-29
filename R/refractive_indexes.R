@@ -317,7 +317,7 @@ n_cellulose <- function(lambda) {
 #'
 #' @examples
 #' # Retrieve the average real part of the refractive index of calcite in the 
-#' visible range:
+#' # visible range:
 #' n_calcite(lambda = 400:700)
 #'
 #' @export
@@ -386,7 +386,7 @@ n_calcite <- function(lambda, comp = F) {
 #'
 #' @examples
 #' # Retrieve the average real part of the refractive index of quartz in the 
-#' visible range:
+#' # visible range:
 #' n_quartz(lambda = 400:700)
 #'
 #' @export

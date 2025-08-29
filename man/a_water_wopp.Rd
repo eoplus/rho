@@ -4,7 +4,8 @@
 \name{a_water_wopp}
 \alias{a_water_wopp}
 \title{Absorption coefficient of liquid water}
-\format{A matrix with 1851 rows and 7 variables:
+\format{
+A matrix with 1851 rows and 7 variables:
 \describe{
   \item{wavelength}{wavelength, in nm}
   \item{a}{absorption coefficient of water, 1/m}
@@ -13,7 +14,8 @@
   \item{sigma_a}{standard deviation of a}
   \item{sigma_da/dS}{standard deviation of da/dS}
   \item{sigma_da/dT}{standard deviation of da/dT}
-}}
+}
+}
 \source{
 WOPP - Water Optical Properties Processor, Version 1.7, 2016.
 }
