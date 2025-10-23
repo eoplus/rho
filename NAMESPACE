@@ -3,6 +3,7 @@
 export(a_water)
 export(adeconv)
 export(apeaks)
+export(avw)
 export(b_water)
 export(bhcoat)
 export(d_water)
