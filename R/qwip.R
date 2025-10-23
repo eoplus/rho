@@ -27,7 +27,7 @@
 
 qwip_score  <- function(wave, refl, sensor) {
 
-    avw     <- avw(wave, refl)
+    avw     <- avw(wave, refl, sensor)
     ndi     <- .qwip_ndi(wave, refl)
     qwip    <- -8.399885E-9 * avw^4 + 1.715532E-5 * avw^3 - 1.301670E-2 * avw^2 + 4.357838 * avw - 5.449532E2
     score   <- ndi - qwip
