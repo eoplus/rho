@@ -31,7 +31,7 @@ avw  <- function(wave, refl, sensor) {
         # minimal set for AERONET-OC
         wave_aoc <- c(412, 443, 488, 547, 667)
         if(length(wave) > 5) stop("Data should be provided at the minimum AERONET-OC waveband set: 412, 443, 488, 547, 667")
-        if(any(abs(wave - wave_oc) > 5)) stop("Data should be provided at wavelengths closest to the nominal 412, 443, 488, 547, 667")
+        if(any(abs(wave - wave_aoc) > 5)) stop("Data should be provided at wavelengths closest to the nominal 412, 443, 488, 547, 667")
         
         if(any(refl < 0)) warning("Negative reflectances in the selected range")
         avw_m <- sum(refl, na.rm = T) / sum(refl/wave, na.rm = T)
